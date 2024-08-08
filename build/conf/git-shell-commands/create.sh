@@ -23,6 +23,5 @@ if [ -d "$GIT_REPO" ]; then
 fi
 git init -q --bare "$GIT_REPO"
 
-
 echo "You can now clone it :"
-ok "git clone ssh://${USER}@$EXTERNAL_HOSTNAME:$EXTERNAL_PORT${GIT_REPO}"
+ok "git clone ssh://${USER}@${EXTERNAL_HOSTNAME}$(url_port $EXTERNAL_PORT)${GIT_REPO}"

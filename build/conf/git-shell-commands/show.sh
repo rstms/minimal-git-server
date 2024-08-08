@@ -22,5 +22,5 @@ GIT_REPO="${REPO_ROOT}/$USER/$1"
 if ! is_git_repo "$GIT_REPO"; then
     die "Repo $GIT_REPO does not exist"
 else
-    ok "git clone ssh://${USER}@$EXTERNAL_HOSTNAME:$EXTERNAL_PORT${GIT_REPO}"
+    ok "git clone ssh://${USER}@${EXTERNAL_HOSTNAME}$(url_port $EXTERNAL_PORT)${GIT_REPO}"
 fi

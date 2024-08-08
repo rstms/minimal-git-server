@@ -21,6 +21,15 @@ is_git_repo()
     fi
 }
 
+url_port() {
+    if [ "$1" = "22" ]; then
+        echo ""
+    else
+        echo ":$1"
+    fi
+}
+
+
 warning()
 {
     safe_tput setaf 3; echo "$*"; safe_tput sgr0
