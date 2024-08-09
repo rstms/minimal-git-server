@@ -20,4 +20,5 @@ do
 done
 
 echo "Starting '$*'"
+
 exec "$@"

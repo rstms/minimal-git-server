@@ -21,12 +21,17 @@ is_git_repo()
     fi
 }
 
-url_port() {
+uri_port() {
     if [ "$1" = "22" ]; then
         echo ""
     else
         echo ":$1"
     fi
+}
+
+repo_uri() {
+  #echo "ssh://${USER}@${EXTERNAL_HOSTNAME}$(uri_port $EXTERNAL_PORT):$1"
+  echo "git@${EXTERNAL_HOSTNAME}$(uri_port $EXTERNAL_PORT):${USER}/$1"
 }
 
 
@@ -42,6 +47,6 @@ ok()
 
 die()
 {
-    safe_tput setaf 1; echo "$*"; safe_tput sgr0
+    safe_tput setaf 1; echo Failed: "$*"; safe_tput sgr0
     exit 1
 }

@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "$0" "$*" | doas /usr/bin/tee /proc/1/fd/1 >/dev/null
+cd /home/$GIT_USER
+doas -u $GIT_USER /usr/bin/git-shell "$@"

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#HELP [REPO_NAME] show clone URL
+#HELP [REPO_NAME] output URL if repo exists or exit with error
 
 show_usage() {
-    echo "Usage: show REPO_NAME"
+    echo "Usage: st REPO_NAME"
 }
 
 # shellcheck disable=SC1091
@@ -17,10 +17,11 @@ then
     exit 1
 fi
 
-GIT_REPO="${REPO_ROOT}/$USER/$1"
+GIT_REPO="${REPO_ROOT}/$1"
 
 if ! is_git_repo "$GIT_REPO"; then
-    die "Repo $GIT_REPO does not exist"
+    die "nonexistent: $1"
 else
-    ok "git clone ssh://${USER}@${EXTERNAL_HOSTNAME}$(url_port $EXTERNAL_PORT)${GIT_REPO}"
+    ok "$(repo_uri $1)"
+    exit 0
 fi

@@ -9,8 +9,8 @@ cat > /srv/conf/git-shell-commands/help << EOM
 . /srv/env
 #shellcheck source=git-shell-commands-common.sh
 . /srv/git-shell-commands-common.sh
-
-echo "Availables commands :"
+echo "User '\$(whoami)' Authenticated."
+echo "Available commands:"
 EOM
 
 for file in /srv/conf/git-shell-commands/*.sh

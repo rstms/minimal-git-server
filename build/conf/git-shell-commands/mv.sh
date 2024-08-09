@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#HELP [SOURCE TARGET] rename SOURCE to TARGET. Might either be folders of git repos
+#HELP [SOURCE TARGET] move (rename) SOURCE to TARGET repository
 
 show_usage() {
-    echo "Usage: rename SOURCE TARGET"
+    echo "Usage: mv SOURCE TARGET"
 }
 
 # shellcheck disable=SC1091
@@ -17,20 +17,19 @@ then
     exit 1
 fi
 
-ok "Moving repo $1 to $2"
-SRC_FOLDER="${REPO_ROOT}/$USER/$1"
-TGT_FOLDER="${REPO_ROOT}/$USER/$2"
+SRC_FOLDER="${REPO_ROOT}/$1"
+TGT_FOLDER="${REPO_ROOT}/$2"
 
 if [ -d "$TGT_FOLDER" ]; then
-    die "Target already exists, skipped !"
+    die "target exists: $2"
 fi
 
 if ! [ -d "$SRC_FOLDER" ]; then
-    die "Source do not exist, skipped !"
+    die "nonexistent source: $1"
 fi
 
 if ! is_git_repo "$SRC_FOLDER"; then
-    warning "Warning, $SRC_FOLDER isn't a git repository"
+    warning "$SRC_FOLDER is not a git repository"
 fi
 
 

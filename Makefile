@@ -1,17 +1,18 @@
 
 dc = docker-compose
+service != basename $(shell pwd)
 
 rebuild:
-	$(dc) build --no-cache
+	$(dc) build --no-cache --force-rm
 
 build:
-	$(dc) build 
+	$(dc) build --force-rm
 
 run: build
-	$(dc) run --service-ports gitserver
+	$(dc) run --service-ports $(service)
 
 start: build
-	$(dc) up -d gitserver
+	$(dc) up -d $(service)
 
 stop:
 	$(dc) down --remove-orphans
@@ -23,7 +24,10 @@ tail:
 	$(dc) logs --follow
 
 kill:
-	docker ps | awk '/minimal-git-server/{print $$1}' | xargs -n 1 -r docker stop
+	$(foreach I,$(shell docker ps | awk '/$(service)/{print $$1}'),docker stop $(I);docker rm $(I);)
+
+clean: stop kill
+	$(foreach I,$(shell docker images -a | awk '/$(service)/{print $$1}'),docker rmi -f $(I);)
 
 
 .PHONY: rebuild build run start stop kill

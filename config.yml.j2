@@ -1,19 +1,11 @@
 external_hostname: {{EXTERNAL_HOSTNAME}}
 external_port: {{EXTERNAL_PORT}}
 accounts:
-  - user: git
+  - user: {{USER1}}
     uid: 2001
     keys:
-      - "{{SSH_PUBKEY}}"
-  - user: pub
+      - "{{USER1_SSH_PUBKEY}}"
+  - user: {{USER2}}
     uid: 2002
     keys:
-      - "{{SSH_PUBKEY}}"
-  - user: {{GITSERVER_USERNAME}}
-    uid: 2003
-    keys:
-      - "{{SSH_PUBKEY}}"
-  - user: {{GITSERVER_ORG}}
-    uid: 2004
-    keys:
-      - "{{SSH_PUBKEY}}"
+      - "{{USER2_SSH_PUBKEY}}"
